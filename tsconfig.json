@@ -1,5 +1,8 @@
 {
     "compilerOptions": {
+<<<<<<< HEAD
+        "baseUrl": ".",
+=======
         "outDir": "./dist/",
         "sourceMap": true,
         "noImplicitAny": true,
@@ -10,10 +13,51 @@
         "alwaysStrict": true,
         "forceConsistentCasingInFileNames": true,
         "noImplicitReturns": true,
+>>>>>>> a171a6d74ef19f75311c97267639a69d9e130bc1
         "strict": true,
-        "noUnusedLocals": true,
-        "jsx": "react",
-        "skipLibCheck": true
+        "target": "ESNext",
+        "module": "ESNext",
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "jsx": "preserve",
+        "allowImportingTsExtensions": true,
+        "jsxImportSource": "solid-js",
+        "types": [
+            "vite/client"
+        ],
+        "useDefineForClassFields": true,
+        "noImplicitAny": false,
+        "isolatedModules": true,
+        "noEmit": true,
+        "lib": [
+            "DOM",
+            "DOM.Iterable",
+            "ESNext"
+        ],
+        "allowJs": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "resolveJsonModule": true,
     },
-    "include": ["./src/**/*"]
+    "include": [
+        "src",
+        "types",
+        "tailwind.config.ts",
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.js",
+        "extras/CustomCalendar"
+    ],
+    "references": [
+        {
+            "path": "./tsconfig.node.json"
+        }
+    ],
+    "exclude": [
+        "node_modules",
+        "dist",
+        "build",
+        "docs"
+    ]
 }

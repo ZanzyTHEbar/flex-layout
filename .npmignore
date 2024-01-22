@@ -17,3 +17,6 @@ webpack_build.config.js
 webpack.config.js 
 cypress.json
 yarn.lock
+pnpm-lock.yaml
+# tsup
+tsup.config.bundled_*.{m,c,}s

@@ -1,27 +1,27 @@
-import { Attribute } from "../Attribute";
-import { AttributeDefinitions } from "../AttributeDefinitions";
-import { DockLocation } from "../DockLocation";
-import { DropInfo } from "../DropInfo";
-import { Orientation } from "../Orientation";
-import { Rect } from "../Rect";
-import { Action } from "./Action";
-import { Actions } from "./Actions";
-import { BorderNode } from "./BorderNode";
-import { BorderSet } from "./BorderSet";
-import { IDraggable } from "./IDraggable";
-import { IDropTarget } from "./IDropTarget";
-import { IJsonModel, ITabSetAttributes } from "./IJsonModel";
-import { Node } from "./Node";
-import { RowNode } from "./RowNode";
-import { TabNode } from "./TabNode";
-import { TabSetNode } from "./TabSetNode";
-import { adjustSelectedIndexAfterDock, adjustSelectedIndexAfterFloat, randomUUID } from "./Utils";
+import { Attribute } from '../Attribute'
+import { AttributeDefinitions } from '../AttributeDefinitions'
+import { DockLocation } from '../DockLocation'
+import { DropInfo } from '../DropInfo'
+import { Orientation } from '../Orientation'
+import { Rect } from '../Rect'
+import { Action } from './Action'
+import { Actions } from './Actions'
+import { BorderNode } from './BorderNode'
+import { BorderSet } from './BorderSet'
+import { IDraggable } from './IDraggable'
+import { IDropTarget } from './IDropTarget'
+import { IJsonModel, ITabSetAttributes } from './IJsonModel'
+import { Node } from './Node'
+import { RowNode } from './RowNode'
+import { TabNode } from './TabNode'
+import { TabSetNode } from './TabSetNode'
+import { adjustSelectedIndexAfterDock, adjustSelectedIndexAfterFloat, randomUUID } from './Utils'
 
 /** @internal */
 export interface ILayoutMetrics {
-    headerBarSize: number;
-    tabBarSize: number;
-    borderBarSize: number;
+    headerBarSize: number
+    tabBarSize: number
+    borderBarSize: number
 }
 
 /**
@@ -34,105 +34,114 @@ export class Model {
      * @returns {Model} a new Model object
      */
     static fromJson(json: IJsonModel) {
-        const model = new Model();
-        Model._attributeDefinitions.fromJson(json.global, model._attributes);
+        const model = new Model()
+        Model._attributeDefinitions.fromJson(json.global, model._attributes)
 
         if (json.borders) {
-            model._borders = BorderSet._fromJson(json.borders, model);
+            model._borders = BorderSet._fromJson(json.borders, model)
         }
-        model._root = RowNode._fromJson(json.layout, model);
-        model._tidy(); // initial tidy of node tree
-        return model;
+        model._root = RowNode._fromJson(json.layout, model)
+        model._tidy() // initial tidy of node tree
+        return model
     }
     /** @internal */
-    private static _attributeDefinitions: AttributeDefinitions = Model._createAttributeDefinitions();
+    private static _attributeDefinitions: AttributeDefinitions = Model._createAttributeDefinitions()
 
     /** @internal */
     private static _createAttributeDefinitions(): AttributeDefinitions {
-        const attributeDefinitions = new AttributeDefinitions();
+        const attributeDefinitions = new AttributeDefinitions()
 
-        attributeDefinitions.add("legacyOverflowMenu", false).setType(Attribute.BOOLEAN);
-        attributeDefinitions.add("enableEdgeDock", true).setType(Attribute.BOOLEAN);
-        attributeDefinitions.add("rootOrientationVertical", false).setType(Attribute.BOOLEAN);
-        attributeDefinitions.add("marginInsets", { top: 0, right: 0, bottom: 0, left: 0 }).setType("IInsets");
-        attributeDefinitions.add("enableUseVisibility", false).setType(Attribute.BOOLEAN);
-        attributeDefinitions.add("enableRotateBorderIcons", true).setType(Attribute.BOOLEAN);
+        attributeDefinitions.add('legacyOverflowMenu', false).setType(Attribute.BOOLEAN)
+        attributeDefinitions.add('enableEdgeDock', true).setType(Attribute.BOOLEAN)
+        attributeDefinitions.add('rootOrientationVertical', false).setType(Attribute.BOOLEAN)
+        attributeDefinitions
+            .add('marginInsets', { top: 0, right: 0, bottom: 0, left: 0 })
+            .setType('IInsets')
+        attributeDefinitions.add('enableUseVisibility', false).setType(Attribute.BOOLEAN)
+        attributeDefinitions.add('enableRotateBorderIcons', true).setType(Attribute.BOOLEAN)
 
         // splitter
-        attributeDefinitions.add("splitterSize", -1).setType(Attribute.NUMBER);
-        attributeDefinitions.add("splitterExtra", 0).setType(Attribute.NUMBER);
+        attributeDefinitions.add('splitterSize', -1).setType(Attribute.NUMBER)
+        attributeDefinitions.add('splitterExtra', 0).setType(Attribute.NUMBER)
 
         // tab
-        attributeDefinitions.add("tabEnableClose", true).setType(Attribute.BOOLEAN);
-        attributeDefinitions.add("tabCloseType", 1).setType("ICloseType");
-        attributeDefinitions.add("tabEnableFloat", false).setType(Attribute.BOOLEAN);
-        attributeDefinitions.add("tabEnableDrag", true).setType(Attribute.BOOLEAN);
-        attributeDefinitions.add("tabEnableRename", true).setType(Attribute.BOOLEAN);
-        attributeDefinitions.add("tabContentClassName", undefined).setType(Attribute.STRING);
-        attributeDefinitions.add("tabClassName", undefined).setType(Attribute.STRING);
-        attributeDefinitions.add("tabIcon", undefined).setType(Attribute.STRING);
-        attributeDefinitions.add("tabEnableRenderOnDemand", true).setType(Attribute.BOOLEAN);
-        attributeDefinitions.add("tabDragSpeed", 0.3).setType(Attribute.NUMBER);
-        attributeDefinitions.add("tabBorderWidth", -1).setType(Attribute.NUMBER);
-        attributeDefinitions.add("tabBorderHeight", -1).setType(Attribute.NUMBER);
+        attributeDefinitions.add('tabEnableClose', true).setType(Attribute.BOOLEAN)
+        attributeDefinitions.add('tabCloseType', 1).setType('ICloseType')
+        attributeDefinitions.add('tabEnableFloat', false).setType(Attribute.BOOLEAN)
+        attributeDefinitions.add('tabEnableDrag', true).setType(Attribute.BOOLEAN)
+        attributeDefinitions.add('tabEnableRename', true).setType(Attribute.BOOLEAN)
+        attributeDefinitions.add('tabContentclass', undefined).setType(Attribute.STRING)
+        attributeDefinitions.add('tabclass', undefined).setType(Attribute.STRING)
+        attributeDefinitions.add('tabIcon', undefined).setType(Attribute.STRING)
+        attributeDefinitions.add('tabEnableRenderOnDemand', true).setType(Attribute.BOOLEAN)
+        attributeDefinitions.add('tabDragSpeed', 0.3).setType(Attribute.NUMBER)
+        attributeDefinitions.add('tabBorderWidth', -1).setType(Attribute.NUMBER)
+        attributeDefinitions.add('tabBorderHeight', -1).setType(Attribute.NUMBER)
 
         // tabset
-        attributeDefinitions.add("tabSetEnableDeleteWhenEmpty", true).setType(Attribute.BOOLEAN);
-        attributeDefinitions.add("tabSetEnableDrop", true).setType(Attribute.BOOLEAN);
-        attributeDefinitions.add("tabSetEnableDrag", true).setType(Attribute.BOOLEAN);
-        attributeDefinitions.add("tabSetEnableDivide", true).setType(Attribute.BOOLEAN);
-        attributeDefinitions.add("tabSetEnableMaximize", true).setType(Attribute.BOOLEAN);
-        attributeDefinitions.add("tabSetEnableClose", false).setType(Attribute.BOOLEAN);
-        attributeDefinitions.add("tabSetEnableSingleTabStretch", false).setType(Attribute.BOOLEAN);
-        attributeDefinitions.add("tabSetAutoSelectTab", true).setType(Attribute.BOOLEAN);
-        attributeDefinitions.add("tabSetClassNameTabStrip", undefined).setType(Attribute.STRING);
-        attributeDefinitions.add("tabSetClassNameHeader", undefined).setType(Attribute.STRING);
-        attributeDefinitions.add("tabSetEnableTabStrip", true).setType(Attribute.BOOLEAN);
-        attributeDefinitions.add("tabSetHeaderHeight", 0).setType(Attribute.NUMBER);
-        attributeDefinitions.add("tabSetTabStripHeight", 0).setType(Attribute.NUMBER);
-        attributeDefinitions.add("tabSetMarginInsets", { top: 0, right: 0, bottom: 0, left: 0 }).setType("IInsets");
-        attributeDefinitions.add("tabSetBorderInsets", { top: 0, right: 0, bottom: 0, left: 0 }).setType("IInsets");
-        attributeDefinitions.add("tabSetTabLocation", "top").setType("ITabLocation");
-        attributeDefinitions.add("tabSetMinWidth", 0).setType(Attribute.NUMBER);
-        attributeDefinitions.add("tabSetMinHeight", 0).setType(Attribute.NUMBER);
+        attributeDefinitions.add('tabSetEnableDeleteWhenEmpty', true).setType(Attribute.BOOLEAN)
+        attributeDefinitions.add('tabSetEnableDrop', true).setType(Attribute.BOOLEAN)
+        attributeDefinitions.add('tabSetEnableDrag', true).setType(Attribute.BOOLEAN)
+        attributeDefinitions.add('tabSetEnableDivide', true).setType(Attribute.BOOLEAN)
+        attributeDefinitions.add('tabSetEnableMaximize', true).setType(Attribute.BOOLEAN)
+        attributeDefinitions.add('tabSetEnableClose', false).setType(Attribute.BOOLEAN)
+        attributeDefinitions.add('tabSetEnableSingleTabStretch', false).setType(Attribute.BOOLEAN)
+        attributeDefinitions.add('tabSetAutoSelectTab', true).setType(Attribute.BOOLEAN)
+        attributeDefinitions.add('tabSetclassTabStrip', undefined).setType(Attribute.STRING)
+        attributeDefinitions.add('tabSetclassHeader', undefined).setType(Attribute.STRING)
+        attributeDefinitions.add('tabSetEnableTabStrip', true).setType(Attribute.BOOLEAN)
+        attributeDefinitions.add('tabSetHeaderHeight', 0).setType(Attribute.NUMBER)
+        attributeDefinitions.add('tabSetTabStripHeight', 0).setType(Attribute.NUMBER)
+        attributeDefinitions
+            .add('tabSetMarginInsets', { top: 0, right: 0, bottom: 0, left: 0 })
+            .setType('IInsets')
+        attributeDefinitions
+            .add('tabSetBorderInsets', { top: 0, right: 0, bottom: 0, left: 0 })
+            .setType('IInsets')
+        attributeDefinitions.add('tabSetTabLocation', 'top').setType('ITabLocation')
+        attributeDefinitions.add('tabSetMinWidth', 0).setType(Attribute.NUMBER)
+        attributeDefinitions.add('tabSetMinHeight', 0).setType(Attribute.NUMBER)
 
         // border
-        attributeDefinitions.add("borderSize", 200).setType(Attribute.NUMBER);
-        attributeDefinitions.add("borderMinSize", 0).setType(Attribute.NUMBER);
-        attributeDefinitions.add("borderBarSize", 0).setType(Attribute.NUMBER);
-        attributeDefinitions.add("borderEnableDrop", true).setType(Attribute.BOOLEAN);
-        attributeDefinitions.add("borderAutoSelectTabWhenOpen", true).setType(Attribute.BOOLEAN);
-        attributeDefinitions.add("borderAutoSelectTabWhenClosed", false).setType(Attribute.BOOLEAN);
-        attributeDefinitions.add("borderClassName", undefined).setType(Attribute.STRING);
-        attributeDefinitions.add("borderEnableAutoHide", false).setType(Attribute.BOOLEAN);
+        attributeDefinitions.add('borderSize', 200).setType(Attribute.NUMBER)
+        attributeDefinitions.add('borderMinSize', 0).setType(Attribute.NUMBER)
+        attributeDefinitions.add('borderBarSize', 0).setType(Attribute.NUMBER)
+        attributeDefinitions.add('borderEnableDrop', true).setType(Attribute.BOOLEAN)
+        attributeDefinitions.add('borderAutoSelectTabWhenOpen', true).setType(Attribute.BOOLEAN)
+        attributeDefinitions.add('borderAutoSelectTabWhenClosed', false).setType(Attribute.BOOLEAN)
+        attributeDefinitions.add('borderclass', undefined).setType(Attribute.STRING)
+        attributeDefinitions.add('borderEnableAutoHide', false).setType(Attribute.BOOLEAN)
 
-        return attributeDefinitions;
+        return attributeDefinitions
     }
 
     /** @internal */
-    private _attributes: Record<string, any>;
+    private _attributes: Record<string, any>
     /** @internal */
-    private _idMap: Record<string, Node>;
+    private _idMap: Record<string, Node>
     /** @internal */
-    private _changeListener?: (action: Action) => void;
+    private _changeListener?: (action: Action) => void
     /** @internal */
-    private _root?: RowNode;
+    private _root?: RowNode
     /** @internal */
-    private _borders: BorderSet;
+    private _borders: BorderSet
     /** @internal */
-    private _onAllowDrop?: (dragNode: Node, dropInfo: DropInfo) => boolean;
+    private _onAllowDrop?: (dragNode: Node, dropInfo: DropInfo) => boolean
     /** @internal */
-    private _maximizedTabSet?: TabSetNode;
+    private _maximizedTabSet?: TabSetNode
     /** @internal */
-    private _activeTabSet?: TabSetNode;
+    private _activeTabSet?: TabSetNode
     /** @internal */
-    private _borderRects: { inner: Rect; outer: Rect } = { inner: Rect.empty(), outer: Rect.empty() };
+    private _borderRects: { inner: Rect; outer: Rect } = {
+        inner: Rect.empty(),
+        outer: Rect.empty(),
+    }
     /** @internal */
-    private _pointerFine: boolean;
+    private _pointerFine: boolean
     /** @internal */
-    private _onCreateTabSet?: (tabNode?: TabNode) => ITabSetAttributes;
+    private _onCreateTabSet?: (tabNode?: TabNode) => ITabSetAttributes
     /** @internal */
-    private _showHiddenBorder: DockLocation;
+    private _showHiddenBorder: DockLocation
 
     /**
      * 'private' constructor. Use the static method Model.fromJson(json) to create a model
@@ -140,16 +149,16 @@ export class Model {
      */
 
     private constructor() {
-        this._attributes = {};
-        this._idMap = {};
-        this._borders = new BorderSet(this);
-        this._pointerFine = true;
-        this._showHiddenBorder = DockLocation.CENTER;
+        this._attributes = {}
+        this._idMap = {}
+        this._borders = new BorderSet(this)
+        this._pointerFine = true
+        this._showHiddenBorder = DockLocation.CENTER
     }
 
     /** @internal */
     _setChangeListener(listener: ((action: Action) => void) | undefined) {
-        this._changeListener = listener;
+        this._changeListener = listener
     }
 
     /**
@@ -157,37 +166,37 @@ export class Model {
      */
     getActiveTabset() {
         if (this._activeTabSet && this.getNodeById(this._activeTabSet.getId())) {
-            return this._activeTabSet;
+            return this._activeTabSet
         } else {
-            return undefined;
+            return undefined
         }
     }
 
     /** @internal */
     _getShowHiddenBorder() {
-        return this._showHiddenBorder;
+        return this._showHiddenBorder
     }
 
     /** @internal */
     _setShowHiddenBorder(location: DockLocation) {
-        this._showHiddenBorder = location;
+        this._showHiddenBorder = location
     }
 
     /** @internal */
     _setActiveTabset(tabsetNode: TabSetNode | undefined) {
-        this._activeTabSet = tabsetNode;
+        this._activeTabSet = tabsetNode
     }
 
     /**
      * Get the currently maximized tabset node
      */
     getMaximizedTabset() {
-        return this._maximizedTabSet;
+        return this._maximizedTabSet
     }
 
     /** @internal */
     _setMaximizedTabset(tabsetNode: TabSetNode | undefined) {
-        this._maximizedTabSet = tabsetNode;
+        this._maximizedTabSet = tabsetNode
     }
 
     /**
@@ -195,19 +204,19 @@ export class Model {
      * @returns {RowNode}
      */
     getRoot() {
-        return this._root as RowNode;
+        return this._root as RowNode
     }
 
     isRootOrientationVertical() {
-        return this._attributes.rootOrientationVertical as boolean;
+        return this._attributes.rootOrientationVertical as boolean
     }
 
     isUseVisibility() {
-        return this._attributes.enableUseVisibility as boolean;
+        return this._attributes.enableUseVisibility as boolean
     }
 
     isEnableRotateBorderIcons() {
-        return this._attributes.enableRotateBorderIcons as boolean;
+        return this._attributes.enableRotateBorderIcons as boolean
     }
 
     /**
@@ -215,22 +224,22 @@ export class Model {
      * @returns {BorderSet|*}
      */
     getBorderSet() {
-        return this._borders;
+        return this._borders
     }
 
     /** @internal */
     _getOuterInnerRects() {
-        return this._borderRects;
+        return this._borderRects
     }
 
     /** @internal */
     _getPointerFine() {
-        return this._pointerFine;
+        return this._pointerFine
     }
 
     /** @internal */
     _setPointerFine(pointerFine: boolean) {
-        this._pointerFine = pointerFine;
+        this._pointerFine = pointerFine
     }
 
     /**
@@ -238,8 +247,8 @@ export class Model {
      * @param fn a function that takes visited node and a integer level as parameters
      */
     visitNodes(fn: (node: Node, level: number) => void) {
-        this._borders._forEachNode(fn);
-        (this._root as RowNode)._forEachNode(fn, 0);
+        this._borders._forEachNode(fn)
+        ;(this._root as RowNode)._forEachNode(fn, 0)
     }
 
     /**
@@ -247,7 +256,7 @@ export class Model {
      * @param id the id to find
      */
     getNodeById(id: string): Node | undefined {
-        return this._idMap[id];
+        return this._idMap[id]
     }
 
     /**
@@ -256,11 +265,11 @@ export class Model {
      * @returns The first Tab Set
      */
     getFirstTabSet(node = this._root as Node): Node {
-        const child = node.getChildren()[0];
+        const child = node.getChildren()[0]
         if (child instanceof TabSetNode) {
-            return child;
+            return child
         } else {
-            return this.getFirstTabSet(child);
+            return this.getFirstTabSet(child)
         }
     }
 
@@ -271,178 +280,199 @@ export class Model {
      * @returns added Node for Actions.addNode; undefined otherwise
      */
     doAction(action: Action): Node | undefined {
-        let returnVal = undefined;
+        let returnVal = undefined
         // console.log(action);
         switch (action.type) {
             case Actions.ADD_NODE: {
-                const newNode = new TabNode(this, action.data.json, true);
-                const toNode = this._idMap[action.data.toNode] as Node & IDraggable;
-                if (toNode instanceof TabSetNode || toNode instanceof BorderNode || toNode instanceof RowNode) {
-                    toNode.drop(newNode, DockLocation.getByName(action.data.location), action.data.index, action.data.select);
-                    returnVal = newNode;
+                const newNode = new TabNode(this, action.data.json, true)
+                const toNode = this._idMap[action.data.toNode] as Node & IDraggable
+                if (
+                    toNode instanceof TabSetNode ||
+                    toNode instanceof BorderNode ||
+                    toNode instanceof RowNode
+                ) {
+                    toNode.drop(
+                        newNode,
+                        DockLocation.getByName(action.data.location),
+                        action.data.index,
+                        action.data.select,
+                    )
+                    returnVal = newNode
                 }
-                break;
+                break
             }
             case Actions.MOVE_NODE: {
-                const fromNode = this._idMap[action.data.fromNode] as Node & IDraggable;
+                const fromNode = this._idMap[action.data.fromNode] as Node & IDraggable
                 if (fromNode instanceof TabNode || fromNode instanceof TabSetNode) {
-                    const toNode = this._idMap[action.data.toNode] as Node & IDropTarget;
-                    if (toNode instanceof TabSetNode || toNode instanceof BorderNode || toNode instanceof RowNode) {
-                        toNode.drop(fromNode, DockLocation.getByName(action.data.location), action.data.index, action.data.select);
+                    const toNode = this._idMap[action.data.toNode] as Node & IDropTarget
+                    if (
+                        toNode instanceof TabSetNode ||
+                        toNode instanceof BorderNode ||
+                        toNode instanceof RowNode
+                    ) {
+                        toNode.drop(
+                            fromNode,
+                            DockLocation.getByName(action.data.location),
+                            action.data.index,
+                            action.data.select,
+                        )
                     }
                 }
-                break;
+                break
             }
             case Actions.DELETE_TAB: {
-                const node = this._idMap[action.data.node];
+                const node = this._idMap[action.data.node]
                 if (node instanceof TabNode) {
-                    node._delete();
+                    node._delete()
                 }
-                break;
+                break
             }
             case Actions.DELETE_TABSET: {
-                const node = this._idMap[action.data.node];
+                const node = this._idMap[action.data.node]
 
                 if (node instanceof TabSetNode) {
                     // first delete all child tabs that are closeable
-                    const children = [...node.getChildren()];
+                    const children = [...node.getChildren()]
                     for (let i = 0; i < children.length; i++) {
-                        const child = children[i];
+                        const child = children[i]
                         if ((child as TabNode).isEnableClose()) {
-                            (child as TabNode)._delete();
+                            ;(child as TabNode)._delete()
                         }
                     }
 
                     if (node.getChildren().length === 0) {
-                        node._delete();
+                        node._delete()
                     }
-                    this._tidy();
+                    this._tidy()
                 }
-                break;
+                break
             }
             case Actions.FLOAT_TAB: {
-                const node = this._idMap[action.data.node];
+                const node = this._idMap[action.data.node]
                 if (node instanceof TabNode) {
-                    node._setFloating(true);
-                    adjustSelectedIndexAfterFloat(node);
+                    node._setFloating(true)
+                    adjustSelectedIndexAfterFloat(node)
                 }
-                break;
+                break
             }
             case Actions.UNFLOAT_TAB: {
-                const node = this._idMap[action.data.node];
+                const node = this._idMap[action.data.node]
                 if (node instanceof TabNode) {
-                    node._setFloating(false);
-                    adjustSelectedIndexAfterDock(node);
+                    node._setFloating(false)
+                    adjustSelectedIndexAfterDock(node)
                 }
-                break;
+                break
             }
             case Actions.RENAME_TAB: {
-                const node = this._idMap[action.data.node];
+                const node = this._idMap[action.data.node]
                 if (node instanceof TabNode) {
-                    node._setName(action.data.text);
+                    node._setName(action.data.text)
                 }
-                break;
+                break
             }
             case Actions.SELECT_TAB: {
-                const tabNode = this._idMap[action.data.tabNode];
+                const tabNode = this._idMap[action.data.tabNode]
                 if (tabNode instanceof TabNode) {
-                    const parent = tabNode.getParent() as Node;
-                    const pos = parent.getChildren().indexOf(tabNode);
+                    const parent = tabNode.getParent() as Node
+                    const pos = parent.getChildren().indexOf(tabNode)
 
                     if (parent instanceof BorderNode) {
                         if (parent.getSelected() === pos) {
-                            parent._setSelected(-1);
+                            parent._setSelected(-1)
                         } else {
-                            parent._setSelected(pos);
+                            parent._setSelected(pos)
                         }
                     } else if (parent instanceof TabSetNode) {
                         if (parent.getSelected() !== pos) {
-                            parent._setSelected(pos);
+                            parent._setSelected(pos)
                         }
-                        this._activeTabSet = parent;
+                        this._activeTabSet = parent
                     }
                 }
-                break;
+                break
             }
             case Actions.SET_ACTIVE_TABSET: {
                 if (action.data.tabsetNode === undefined) {
-                    this._activeTabSet = undefined;
+                    this._activeTabSet = undefined
                 } else {
-                    const tabsetNode = this._idMap[action.data.tabsetNode];
+                    const tabsetNode = this._idMap[action.data.tabsetNode]
                     if (tabsetNode instanceof TabSetNode) {
-                        this._activeTabSet = tabsetNode;
+                        this._activeTabSet = tabsetNode
                     }
                 }
-                break;
+                break
             }
             case Actions.ADJUST_SPLIT: {
-                const node1 = this._idMap[action.data.node1];
-                const node2 = this._idMap[action.data.node2];
+                const node1 = this._idMap[action.data.node1]
+                const node2 = this._idMap[action.data.node2]
 
-                if ((node1 instanceof TabSetNode || node1 instanceof RowNode) && (node2 instanceof TabSetNode || node2 instanceof RowNode)) {
-                    this._adjustSplitSide(node1, action.data.weight1, action.data.pixelWidth1);
-                    this._adjustSplitSide(node2, action.data.weight2, action.data.pixelWidth2);
+                if (
+                    (node1 instanceof TabSetNode || node1 instanceof RowNode) &&
+                    (node2 instanceof TabSetNode || node2 instanceof RowNode)
+                ) {
+                    this._adjustSplitSide(node1, action.data.weight1, action.data.pixelWidth1)
+                    this._adjustSplitSide(node2, action.data.weight2, action.data.pixelWidth2)
                 }
-                break;
+                break
             }
             case Actions.ADJUST_BORDER_SPLIT: {
-                const node = this._idMap[action.data.node];
+                const node = this._idMap[action.data.node]
                 if (node instanceof BorderNode) {
-                    node._setSize(action.data.pos);
+                    node._setSize(action.data.pos)
                 }
-                break;
+                break
             }
             case Actions.MAXIMIZE_TOGGLE: {
-                const node = this._idMap[action.data.node];
+                const node = this._idMap[action.data.node]
                 if (node instanceof TabSetNode) {
                     if (node === this._maximizedTabSet) {
-                        this._maximizedTabSet = undefined;
+                        this._maximizedTabSet = undefined
                     } else {
-                        this._maximizedTabSet = node;
-                        this._activeTabSet = node;
+                        this._maximizedTabSet = node
+                        this._activeTabSet = node
                     }
                 }
 
-                break;
+                break
             }
             case Actions.UPDATE_MODEL_ATTRIBUTES: {
-                this._updateAttrs(action.data.json);
-                break;
+                this._updateAttrs(action.data.json)
+                break
             }
 
             case Actions.UPDATE_NODE_ATTRIBUTES: {
-                const node = this._idMap[action.data.node];
-                node._updateAttrs(action.data.json);
-                break;
+                const node = this._idMap[action.data.node]
+                node._updateAttrs(action.data.json)
+                break
             }
             default:
-                break;
+                break
         }
 
-        this._updateIdMap();
+        this._updateIdMap()
 
         if (this._changeListener !== undefined) {
-            this._changeListener(action);
+            this._changeListener(action)
         }
 
-        return returnVal;
+        return returnVal
     }
 
     /** @internal */
     _updateIdMap() {
         // regenerate idMap to stop it building up
-        this._idMap = {};
-        this.visitNodes((node) => (this._idMap[node.getId()] = node));
+        this._idMap = {}
+        this.visitNodes((node) => (this._idMap[node.getId()] = node))
         // console.log(JSON.stringify(Object.keys(this._idMap)));
     }
 
     /** @internal */
     _adjustSplitSide(node: TabSetNode | RowNode, weight: number, pixels: number) {
-        node._setWeight(weight);
+        node._setWeight(weight)
         if (node.getWidth() != null && node.getOrientation() === Orientation.VERT) {
-            node._updateAttrs({ width: pixels });
+            node._updateAttrs({ width: pixels })
         } else if (node.getHeight() != null && node.getOrientation() === Orientation.HORZ) {
-            node._updateAttrs({ height: pixels });
+            node._updateAttrs({ height: pixels })
         }
     }
 
@@ -451,91 +481,95 @@ export class Model {
      * @returns {IJsonModel} json object that represents this model
      */
     toJson(): IJsonModel {
-        const global: any = {};
-        Model._attributeDefinitions.toJson(global, this._attributes);
+        const global: any = {}
+        Model._attributeDefinitions.toJson(global, this._attributes)
 
         // save state of nodes
         this.visitNodes((node) => {
-            node._fireEvent("save", undefined);
-        });
+            node._fireEvent('save', undefined)
+        })
 
-        return { global, borders: this._borders._toJson(), layout: (this._root as RowNode).toJson() };
+        return {
+            global,
+            borders: this._borders._toJson(),
+            layout: (this._root as RowNode).toJson(),
+        }
     }
 
     getSplitterSize() {
-        let splitterSize = this._attributes.splitterSize as number;
+        let splitterSize = this._attributes.splitterSize as number
         if (splitterSize === -1) {
             // use defaults
-            splitterSize = this._pointerFine ? 8 : 12; // larger for mobile
+            splitterSize = this._pointerFine ? 8 : 12 // larger for mobile
         }
-        return splitterSize;
+        return splitterSize
     }
 
     isLegacyOverflowMenu() {
-        return this._attributes.legacyOverflowMenu as boolean;
+        return this._attributes.legacyOverflowMenu as boolean
     }
 
     getSplitterExtra() {
-        return this._attributes.splitterExtra as number;
+        return this._attributes.splitterExtra as number
     }
 
     isEnableEdgeDock() {
-        return this._attributes.enableEdgeDock as boolean;
+        return this._attributes.enableEdgeDock as boolean
     }
 
     /** @internal */
     _addNode(node: Node) {
-        const id = node.getId();
+        const id = node.getId()
         if (this._idMap[id] !== undefined) {
-            throw new Error(`Error: each node must have a unique id, duplicate id:${node.getId()}`);
+            throw new Error(`Error: each node must have a unique id, duplicate id:${node.getId()}`)
         }
 
-        if (node.getType() !== "splitter") {
-            this._idMap[id] = node;
+        if (node.getType() !== 'splitter') {
+            this._idMap[id] = node
         }
     }
 
     /** @internal */
     _layout(rect: Rect, metrics: ILayoutMetrics) {
         // let start = Date.now();
-        this._borderRects = this._borders._layoutBorder({ outer: rect, inner: rect }, metrics);
-        rect = this._borderRects.inner.removeInsets(this._getAttribute("marginInsets"));
+        this._borderRects = this._borders._layoutBorder({ outer: rect, inner: rect }, metrics)
+        rect = this._borderRects.inner.removeInsets(this._getAttribute('marginInsets'))
 
-        this._root?.calcMinSize();
-        (this._root as RowNode)._layout(rect, metrics);
+        this._root?.calcMinSize()
+        ;(this._root as RowNode)._layout(rect, metrics)
         // console.log("layout time: " + (Date.now() - start));
-        return rect;
+        return rect
     }
 
     /** @internal */
     _findDropTargetNode(dragNode: Node & IDraggable, x: number, y: number) {
-        let node = (this._root as RowNode)._findDropTargetNode(dragNode, x, y);
+        let node = (this._root as RowNode)._findDropTargetNode(dragNode, x, y)
         if (node === undefined) {
-            node = this._borders._findDropTargetNode(dragNode, x, y);
+            node = this._borders._findDropTargetNode(dragNode, x, y)
         }
-        return node;
+        return node
     }
 
     /** @internal */
     _tidy() {
         // console.log("before _tidy", this.toString());
-        (this._root as RowNode)._tidy();
+        ;(this._root as RowNode)._tidy()
         // console.log("after _tidy", this.toString());
     }
 
     /** @internal */
     _updateAttrs(json: any) {
-        Model._attributeDefinitions.update(json, this._attributes);
+        Model._attributeDefinitions.update(json, this._attributes)
     }
 
     /** @internal */
     _nextUniqueId() {
-        return "#" + randomUUID();
+        return '#' + randomUUID()
     }
 
     /** @internal */
     _getAttribute(name: string): any {
-        return this._attributes[name];
+        return this._attributes[name]
     }
 
     /**
@@ -543,12 +577,12 @@ export class Model {
      * @param onAllowDrop function that takes the drag node and DropInfo and returns true if the drop is allowed
      */
     setOnAllowDrop(onAllowDrop: (dragNode: Node, dropInfo: DropInfo) => boolean) {
-        this._onAllowDrop = onAllowDrop;
+        this._onAllowDrop = onAllowDrop
     }
 
     /** @internal */
     _getOnAllowDrop() {
-        return this._onAllowDrop;
+        return this._onAllowDrop
     }
 
     /**
@@ -558,23 +592,43 @@ export class Model {
      * @param onCreateTabSet
      */
     setOnCreateTabSet(onCreateTabSet: (tabNode?: TabNode) => ITabSetAttributes) {
-        this._onCreateTabSet = onCreateTabSet;
+        this._onCreateTabSet = onCreateTabSet
     }
 
     /** @internal */
     _getOnCreateTabSet() {
-        return this._onCreateTabSet;
+        return this._onCreateTabSet
     }
 
     static toTypescriptInterfaces() {
-        console.log(Model._attributeDefinitions.toTypescriptInterface("Global", undefined));
-        console.log(RowNode.getAttributeDefinitions().toTypescriptInterface("Row", Model._attributeDefinitions));
-        console.log(TabSetNode.getAttributeDefinitions().toTypescriptInterface("TabSet", Model._attributeDefinitions));
-        console.log(TabNode.getAttributeDefinitions().toTypescriptInterface("Tab", Model._attributeDefinitions));
-        console.log(BorderNode.getAttributeDefinitions().toTypescriptInterface("Border", Model._attributeDefinitions));
+        console.log(Model._attributeDefinitions.toTypescriptInterface('Global', undefined))
+        console.log(
+            RowNode.getAttributeDefinitions().toTypescriptInterface(
+                'Row',
+                Model._attributeDefinitions,
+            ),
+        )
+        console.log(
+            TabSetNode.getAttributeDefinitions().toTypescriptInterface(
+                'TabSet',
+                Model._attributeDefinitions,
+            ),
+        )
+        console.log(
+            TabNode.getAttributeDefinitions().toTypescriptInterface(
+                'Tab',
+                Model._attributeDefinitions,
+            ),
+        )
+        console.log(
+            BorderNode.getAttributeDefinitions().toTypescriptInterface(
+                'Border',
+                Model._attributeDefinitions,
+            ),
+        )
     }
 
     toString() {
-        return JSON.stringify(this.toJson());
+        return JSON.stringify(this.toJson())
     }
 }

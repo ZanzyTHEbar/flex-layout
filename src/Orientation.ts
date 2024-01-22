@@ -1,28 +1,28 @@
 export class Orientation {
-    static HORZ = new Orientation("horz");
-    static VERT = new Orientation("vert");
+    static HORZ = new Orientation('horz')
+    static VERT = new Orientation('vert')
 
     static flip(from: Orientation) {
         if (from === Orientation.HORZ) {
-            return Orientation.VERT;
+            return Orientation.VERT
         } else {
-            return Orientation.HORZ;
+            return Orientation.HORZ
         }
     }
 
     /** @internal */
-    private _name: string;
+    private _name: string
 
     /** @internal */
     private constructor(name: string) {
-        this._name = name;
+        this._name = name
     }
 
     getName() {
-        return this._name;
+        return this._name
     }
 
     toString() {
-        return this._name;
+        return this._name
     }
 }

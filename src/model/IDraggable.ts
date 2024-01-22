@@ -1,6 +1,6 @@
 export interface IDraggable {
     /** @internal */
-    isEnableDrag(): boolean;
+    isEnableDrag(): boolean
     /** @internal */
-    getName(): string | undefined;
+    getName(): string | undefined
 }

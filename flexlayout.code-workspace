@@ -1,0 +1,116 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "tailwindCSS.includeLanguages": {
+            "html": "html",
+            "javascript": "javascript",
+            "css": "css"
+        },
+        "files.autoSave": "afterDelay",
+        "editor.quickSuggestions": {
+            "strings": true
+        },
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": "explicit"
+        },
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "[toml]": {
+            "editor.defaultFormatter": "tamasfe.even-better-toml"
+        },
+        "[jsonc]": {
+            "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[javascript]": {
+            "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[typescript]": {
+            "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "liveServer.settings.multiRootWorkspaceName": "Example",
+        "[json]": {
+            "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "editor.formatOnSave": true,
+        "files.exclude": {
+            "**/.git": false
+        },
+        "cSpell.words": [
+            "aichat",
+            "artboard",
+            "borderclass",
+            "chrono",
+            "Clothoid",
+            "clsx",
+            "codegen",
+            "Configurator",
+            "daisyui",
+            "daygrid",
+            "deepmerge",
+            "DLNA",
+            "extralight",
+            "eyetrack",
+            "eyetrackvrfft",
+            "flashtool",
+            "flexlayout",
+            "Frontyard",
+            "fullcalendar",
+            "getclass",
+            "globalstyles",
+            "highlightjs",
+            "hljs",
+            "HORZ",
+            "improv",
+            "Iprops",
+            "journaling",
+            "kobalte",
+            "Kruckenberg",
+            "lofi",
+            "luxon",
+            "manifestfile",
+            "msvc",
+            "nanos",
+            "nord",
+            "notif",
+            "notifs",
+            "outin",
+            "Pkce",
+            "popout",
+            "Posterize",
+            "posterized",
+            "posterizer",
+            "potrace",
+            "preact",
+            "Preferebly",
+            "Raspberrypi",
+            "ratelimit",
+            "readwrite",
+            "reqwest",
+            "solidjs",
+            "specta",
+            "squircle",
+            "stackoverflow",
+            "Swatinem",
+            "synthwave",
+            "tabset",
+            "tamasfe",
+            "thisbeyond",
+            "thiserror",
+            "timegrid",
+            "Tindie",
+            "tsup",
+            "typecheck",
+            "ulidx",
+            "Unlisten",
+            "vnode",
+            "Waveshare",
+            "webserial",
+            "wireframe",
+            "Xsts",
+            "zanzythebar"
+        ]
+    }
+}

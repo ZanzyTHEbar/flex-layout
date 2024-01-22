@@ -1,9 +1,9 @@
-import * as React from "react";
-import { DragDrop } from "./DragDrop";
-import { TabNode } from "./model/TabNode";
-import { CLASSES } from "./Types";
-import { IconFactory, ILayoutCallbacks, TitleFactory } from "./view/Layout";
-import { TabButtonStamp } from "./view/TabButtonStamp";
+import { Component, Index, Show } from 'solid-js'
+import { DragDrop } from './DragDrop'
+import { CLASSES } from './Types'
+import { TabNode } from './model/TabNode'
+import { IconFactory, ILayoutCallbacks, TitleFactory } from './view/Layout'
+import { TabButtonStamp } from './view/TabButtonStamp'
 
 /** @internal */
 export function showPopup(
@@ -14,52 +14,53 @@ export function showPopup(
     iconFactory?: IconFactory,
     titleFactory?: TitleFactory,
 ) {
-    const layoutDiv = layout.getRootDiv();
-    const classNameMapper = layout.getClassName;
-    const currentDocument = triggerElement.ownerDocument;
-    const triggerRect = triggerElement.getBoundingClientRect();
-    const layoutRect = layoutDiv?.getBoundingClientRect() ?? new DOMRect(0, 0, 100, 100);
+    const layoutDiv = layout.getRootDiv()
+    const classMapper = layout.getclass
+    const currentDocument = triggerElement.ownerDocument
+    const triggerRect = triggerElement.getBoundingClientRect()
+    const layoutRect = layoutDiv?.getBoundingClientRect() ?? new DOMRect(0, 0, 100, 100)
 
-    const elm = currentDocument.createElement("div");
-    elm.className = classNameMapper(CLASSES.FLEXLAYOUT__POPUP_MENU_CONTAINER);
+    const elm = currentDocument.createElement('div')
+    elm.className = classMapper(CLASSES.FLEXLAYOUT__POPUP_MENU_CONTAINER)
     if (triggerRect.left < layoutRect.left + layoutRect.width / 2) {
-        elm.style.left = triggerRect.left - layoutRect.left + "px";
+        elm.style.left = triggerRect.left - layoutRect.left + 'px'
     } else {
-        elm.style.right = layoutRect.right - triggerRect.right + "px";
+        elm.style.right = layoutRect.right - triggerRect.right + 'px'
     }
 
     if (triggerRect.top < layoutRect.top + layoutRect.height / 2) {
-        elm.style.top = triggerRect.top - layoutRect.top + "px";
+        elm.style.top = triggerRect.top - layoutRect.top + 'px'
     } else {
-        elm.style.bottom = layoutRect.bottom - triggerRect.bottom + "px";
+        elm.style.bottom = layoutRect.bottom - triggerRect.bottom + 'px'
     }
-    DragDrop.instance.addGlass(() => onHide());
-    DragDrop.instance.setGlassCursorOverride("default");
+    DragDrop.instance.addGlass(() => onHide())
+    DragDrop.instance.setGlassCursorOverride('default')
 
     if (layoutDiv) {
-        layoutDiv.appendChild(elm);
+        layoutDiv.appendChild(elm)
     }
 
     const onHide = () => {
-        layout.hidePortal();
-        DragDrop.instance.hideGlass();
+        layout.hidePortal()
+        DragDrop.instance.hideGlass()
         if (layoutDiv) {
-            layoutDiv.removeChild(elm);
+            layoutDiv.removeChild(elm)
         }
-        elm.removeEventListener("mousedown", onElementMouseDown);
-        currentDocument.removeEventListener("mousedown", onDocMouseDown);
-    };
+        elm.removeEventListener('mousedown', onElementMouseDown)
+        currentDocument.removeEventListener('mousedown', onDocMouseDown)
+    }
 
     const onElementMouseDown = (event: Event) => {
-        event.stopPropagation();
-    };
+        event.stopPropagation()
+    }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const onDocMouseDown = (_event: Event) => {
-        onHide();
-    };
+        onHide()
+    }
 
-    elm.addEventListener("mousedown", onElementMouseDown);
-    currentDocument.addEventListener("mousedown", onDocMouseDown);
+    elm.addEventListener('mousedown', onElementMouseDown)
+    currentDocument.addEventListener('mousedown', onDocMouseDown)
 
     layout.showPortal(
         <PopupMenu
@@ -67,56 +68,62 @@ export function showPopup(
             onSelect={onSelect}
             onHide={onHide}
             items={items}
-            classNameMapper={classNameMapper}
+            classMapper={classMapper}
             layout={layout}
             iconFactory={iconFactory}
             titleFactory={titleFactory}
         />,
         elm,
-    );
+    )
 }
 
 /** @internal */
 interface IPopupMenuProps {
-    items: { index: number; node: TabNode }[];
-    currentDocument: Document;
-    onHide: () => void;
-    onSelect: (item: { index: number; node: TabNode }) => void;
-    classNameMapper: (defaultClassName: string) => string;
-    layout: ILayoutCallbacks;
-    iconFactory?: IconFactory;
-    titleFactory?: TitleFactory;
+    items: { index: number; node: TabNode }[]
+    currentDocument: Document
+    onHide: () => void
+    onSelect: (item: { index: number; node: TabNode }) => void
+    classMapper: (defaultClass: string) => string
+    layout: ILayoutCallbacks
+    iconFactory?: IconFactory
+    titleFactory?: TitleFactory
 }
 
 /** @internal */
-const PopupMenu = (props: IPopupMenuProps) => {
-    const { items, onHide, onSelect, classNameMapper, layout, iconFactory, titleFactory } = props;
-
-    const onItemClick = (item: { index: number; node: TabNode }, event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        onSelect(item);
-        onHide();
-        event.stopPropagation();
-    };
-
-    const itemElements = items.map((item, i) => (
-        <div
-            key={item.index}
-            className={classNameMapper(CLASSES.FLEXLAYOUT__POPUP_MENU_ITEM)}
-            data-layout-path={"/popup-menu/tb" + i}
-            onClick={(event) => onItemClick(item, event)}
-            title={item.node.getHelpText()}
-        >
-            {item.node.getModel().isLegacyOverflowMenu() ? (
-                item.node._getNameForOverflowMenu()
-            ) : (
-                <TabButtonStamp node={item.node} layout={layout} iconFactory={iconFactory} titleFactory={titleFactory} />
-            )}
-        </div>
-    ));
+const PopupMenu: Component<IPopupMenuProps> = (props) => {
+    const onItemClick = (item: { index: number; node: TabNode }, event: MouseEvent) => {
+        props.onSelect(item)
+        props.onHide()
+        event.stopPropagation()
+    }
 
     return (
-        <div className={classNameMapper(CLASSES.FLEXLAYOUT__POPUP_MENU)} data-layout-path="/popup-menu">
-            {itemElements}
+        <div
+            class={props.classMapper(CLASSES.FLEXLAYOUT__POPUP_MENU)}
+            data-layout-path="/popup-menu">
+            <Index each={props.items}>
+                {(item, i) => (
+                    <div
+                        data-key={item().index}
+                        class={props.classMapper(CLASSES.FLEXLAYOUT__POPUP_MENU_ITEM)}
+                        data-layout-path={'/popup-menu/tb' + i}
+                        onClick={(event) => onItemClick(item(), event)}
+                        title={item().node.getHelpText()}>
+                        <Show
+                            when={item().node.getModel().isLegacyOverflowMenu()}
+                            fallback={
+                                <TabButtonStamp
+                                    node={item().node}
+                                    layout={props.layout}
+                                    iconFactory={props.iconFactory}
+                                    titleFactory={props.titleFactory}
+                                />
+                            }>
+                            {item().node._getNameForOverflowMenu()}
+                        </Show>
+                    </div>
+                )}
+            </Index>
         </div>
-    );
-};
+    )
+}

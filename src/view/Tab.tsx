@@ -41,7 +41,7 @@ export const Tab = (props: ITabProps) => {
         }
     };
 
-    const cm = layout.getClassName;
+    const cm = layout.getclass;
     const useVisibility = node.getModel().isUseVisibility();
 
     const parentNode = node.getParent() as TabSetNode | BorderNode;
@@ -61,18 +61,18 @@ export const Tab = (props: ITabProps) => {
         child = factory(node);
     }
 
-    let className = cm(CLASSES.FLEXLAYOUT__TAB);
+    let class = cm(CLASSES.FLEXLAYOUT__TAB);
     if (parentNode instanceof BorderNode) {
-        className += " " + cm(CLASSES.FLEXLAYOUT__TAB_BORDER);
-        className += " " + cm(CLASSES.FLEXLAYOUT__TAB_BORDER_ + parentNode.getLocation().getName());
+        class += " " + cm(CLASSES.FLEXLAYOUT__TAB_BORDER);
+        class += " " + cm(CLASSES.FLEXLAYOUT__TAB_BORDER_ + parentNode.getLocation().getName());
     }
 
-    if (node.getContentClassName() !== undefined) {
-        className += " " + node.getContentClassName();
+    if (node.getContentclass() !== undefined) {
+        class += " " + node.getContentclass();
     }
 
     return (
-        <div className={className} data-layout-path={path} onMouseDown={onMouseDown} onTouchStart={onMouseDown} style={style}>
+        <div class={class} data-layout-path={path} onMouseDown={onMouseDown} onTouchStart={onMouseDown} style={style}>
             <ErrorBoundary message={props.layout.i18nName(I18nLabel.Error_rendering_component)}>
                 <Fragment>{child}</Fragment>
             </ErrorBoundary>

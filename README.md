@@ -72,10 +72,10 @@ The `<Layout>` component renders the tabsets and splitters, it takes the followi
 #### Required props:
 
 
-| Prop            | Description       |
-| --------------- | ----------------- |
-| model           | the layout model  |
-| factory         | a factory function for creating React components |
+| Prop    | Description                                      |
+| ------- | ------------------------------------------------ |
+| model   | the layout model                                 |
+| factory | a factory function for creating React components |
 
 Additional [optional props](#optional-props)
 
@@ -238,29 +238,29 @@ for example see the getDocument() callback in agGrid at https://www.ag-grid.com/
 ## Optional Props
 
 
-| Prop            | Description       |
-| --------------- | ----------------- |
-| font            | the tab font (overrides value in css). Example: font={{size:"12px", style:"italic"}}|
-| icons           | object mapping keys among `close`, `maximize`, `restore`, `more`, `popout` to React nodes to use in place of the default icons, can alternatively return functions for creating the React nodes |
-| onAction        | function called whenever the layout generates an action to update the model (allows for intercepting actions before they are dispatched to the model, for example, asking the user to confirm a tab close.) Returning `undefined` from the function will halt the action, otherwise return the action to continue |
-| onRenderTab     | function called when rendering a tab, allows leading (icon), content section, buttons and name used in overflow menu to be customized |
-| onRenderTabSet  | function called when rendering a tabset, allows header and buttons to be customized |
-| onModelChange   | function called when model has changed |
-| onExternalDrag  | function called when an external object (not a tab) gets dragged onto the layout, with a single `dragenter` argument. Should return either `undefined` to reject the drag/drop or an object with keys `dragText`, `json`Drop`, to create a tab via drag (similar to a call to `addTabToTabSet`). Function `onDrop` is passed the added tab `Node` and the `drop` `DragEvent`, unless the drag was canceled. |
-| classNameMapper | function called with default css class name, return value is class name that will be used. Mainly for use with css modules.|
-| i18nMapper      | function called for each I18nLabel to allow user translation, currently used for tab and tabset move messages, return undefined to use default values |
-| supportsPopout  | if left undefined will do simple check based on userAgent |
-| popoutURL       | URL of popout window relative to origin, defaults to popout.html |
-| realtimeResize  | boolean value, defaults to false, resize tabs as splitters are dragged. Warning: this can cause resizing to become choppy when tabs are slow to draw |
-| onTabDrag       | function called while dragging a tab, whether from the layout or using `addTabWithDragAndDrop`. Called with the `TabNode` being dragged / the tab json from `addTabWithDragAndDrop`, the `TabNode` being dragged over, the x and y coordinates relative to the dragged-over tab, and the `DockLocation` that would be used. Should return undefined for default behavior, or an object containing `x`, `y`, `width`, `height`, `callback`, `cursor` fields. Coordinates are in pixels relative to the dragged-over tab, and `callback` will be called with the same arguments if the tab is dropped. `cursor` is an optional string field that should contain a CSS cursor value, such as `copy` or `row-resize`. If `callback` is called, the layout does not perform its default behavior on drop. |
-| onRenderDragRect | callback for rendering the drag rectangles |
-| onRenderFloatingTabPlaceholder | callback for rendering the floating tab placeholder |
-| onContextMenu    | callback for handling context actions on tabs and tabsets |
-| onAuxMouseClick  | callback for handling mouse clicks on tabs and tabsets with alt, meta, shift keys, also handles center mouse clicks |
-| onShowOverflowMenu | callback for handling the display of the tab overflow menu |
-| onTabSetPlaceHolder | callback for rendering a placeholder when a tabset is empty |
-| iconFactory      | a factory function for creating icon components for tab bar buttons. <br/><br/> NOTE: for greater customization of the tab use onRenderTab instead of this callback |
-| titleFactory     | a factory function for creating title components for tab bar buttons. <br /><br /> NOTE: for greater customization of the tab use onRenderTab instead of this callback  |
+| Prop                           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| font                           | the tab font (overrides value in css). Example: font={{size:"12px", style:"italic"}}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| icons                          | object mapping keys among `close`, `maximize`, `restore`, `more`, `popout` to React nodes to use in place of the default icons, can alternatively return functions for creating the React nodes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| onAction                       | function called whenever the layout generates an action to update the model (allows for intercepting actions before they are dispatched to the model, for example, asking the user to confirm a tab close.) Returning `undefined` from the function will halt the action, otherwise return the action to continue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| onRenderTab                    | function called when rendering a tab, allows leading (icon), content section, buttons and name used in overflow menu to be customized                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| onRenderTabSet                 | function called when rendering a tabset, allows header and buttons to be customized                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| onModelChange                  | function called when model has changed                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| onExternalDrag                 | function called when an external object (not a tab) gets dragged onto the layout, with a single `dragenter` argument. Should return either `undefined` to reject the drag/drop or an object with keys `dragText`, `json`Drop`, to create a tab via drag (similar to a call to `addTabToTabSet`). Function `onDrop` is passed the added tab `Node` and the `drop` `DragEvent`, unless the drag was canceled.                                                                                                                                                                                                                                                                                                                                                                                          |
+| classMapper                    | function called with default css class name, return value is class name that will be used. Mainly for use with css modules.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| i18nMapper                     | function called for each I18nLabel to allow user translation, currently used for tab and tabset move messages, return undefined to use default values                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| supportsPopout                 | if left undefined will do simple check based on userAgent                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| popoutURL                      | URL of popout window relative to origin, defaults to popout.html                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| realtimeResize                 | boolean value, defaults to false, resize tabs as splitters are dragged. Warning: this can cause resizing to become choppy when tabs are slow to draw                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| onTabDrag                      | function called while dragging a tab, whether from the layout or using `addTabWithDragAndDrop`. Called with the `TabNode` being dragged / the tab json from `addTabWithDragAndDrop`, the `TabNode` being dragged over, the x and y coordinates relative to the dragged-over tab, and the `DockLocation` that would be used. Should return undefined for default behavior, or an object containing `x`, `y`, `width`, `height`, `callback`, `cursor` fields. Coordinates are in pixels relative to the dragged-over tab, and `callback` will be called with the same arguments if the tab is dropped. `cursor` is an optional string field that should contain a CSS cursor value, such as `copy` or `row-resize`. If `callback` is called, the layout does not perform its default behavior on drop. |
+| onRenderDragRect               | callback for rendering the drag rectangles                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| onRenderFloatingTabPlaceholder | callback for rendering the floating tab placeholder                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| onContextMenu                  | callback for handling context actions on tabs and tabsets                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| onAuxMouseClick                | callback for handling mouse clicks on tabs and tabsets with alt, meta, shift keys, also handles center mouse clicks                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| onShowOverflowMenu             | callback for handling the display of the tab overflow menu                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| onTabSetPlaceHolder            | callback for rendering a placeholder when a tabset is empty                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| iconFactory                    | a factory function for creating icon components for tab bar buttons. <br/><br/> NOTE: for greater customization of the tab use onRenderTab instead of this callback                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| titleFactory                   | a factory function for creating title components for tab bar buttons. <br /><br /> NOTE: for greater customization of the tab use onRenderTab instead of this callback                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 
 
 ## Global Config attributes
@@ -269,7 +269,7 @@ Attributes allowed in the 'global' element
 
 
 | Attribute                     | Default | Description                                                                                                  |
-|-------------------------------|:-------:|--------------------------------------------------------------------------------------------------------------|
+| ----------------------------- | :-----: | ------------------------------------------------------------------------------------------------------------ |
 | splitterSize                  |    8    | width in pixels of all splitters between tabsets/borders                                                     |
 | splitterExtra                 |    0    | additional width in pixels of the splitter hit test area                                                     |
 | legacyOverflowMenu            |  false  | use the legacy text only overflow menu                                                                       |
@@ -280,8 +280,8 @@ Attributes allowed in the 'global' element
 | tabEnableDrag                 |  true   | allow user to drag all tabs to new location                                                                  |
 | tabEnableRename               |  true   | allow user to rename all tabs by double clicking                                                             |
 | tabEnableFloat                |  false  | enable popouts in all tabs (in popout capable browser)                                                       |
-| tabClassName                  |  null   |                                                                                                              |
-| tabContentClassName           |  null   |                                                                                                              |
+| tabclass                      |  null   |                                                                                                              |
+| tabContentclass               |  null   |                                                                                                              |
 | tabIcon                       |  null   |                                                                                                              |
 | tabEnableRenderOnDemand       |  true   | whether to avoid rendering component until tab is visible                                                    |
 | tabDragSpeed                  |   0.3   | CSS transition speed of drag outlines (in seconds)                                                           |
@@ -294,9 +294,9 @@ Attributes allowed in the 'global' element
 | tabSetEnableMaximize          |  true   | allow user to maximize all tabsets to fill view via maximize button                                          |
 | tabSetEnableClose             |  false  | allow user to close all tabsets via close button                                                             |
 | tabSetAutoSelectTab           |  true   | whether to select new/moved tabs in all tabsets                                                              |
-| tabSetClassNameTabStrip       |  null   | height in pixels of tab strips in all tabsets                                                                |
+| tabSetclassTabStrip           |  null   | height in pixels of tab strips in all tabsets                                                                |
 | tabSetEnableSingleTabStretch  |  false  | if a tabset has only a single tab then stretch the single tab to fill area and display in a header style     |
-| tabSetClassNameHeader         |  null   |                                                                                                              |
+| tabSetclassHeader             |  null   |                                                                                                              |
 | tabSetEnableTabStrip          |  true   | enable tab strip and allow multiple tabs in all tabsets                                                      |
 | tabSetHeaderHeight            |    0    | height of tabset header in pixels; if left as 0 then the value will be calculated from the current fontSize  |
 | tabSetTabStripHeight          |    0    | height of tabset tab bar in pixels; if left as 0 then the value will be calculated from the current fontSize |
@@ -305,7 +305,7 @@ Attributes allowed in the 'global' element
 | borderEnableDrop              |  true   | allow user to drag tabs into this border                                                                     |
 | borderAutoSelectTabWhenOpen   |  true   | whether to select new/moved tabs in border when the border is already open                                   |
 | borderAutoSelectTabWhenClosed |  false  | whether to select new/moved tabs in border when the border is curently closed                                |
-| borderClassName               |  null   |                                                                                                              |
+| borderclass                   |  null   |                                                                                                              |
 | borderSize                    |   200   | initial width in pixels for left/right borders, height for top/bottom borders                                |
 | borderMinSize                 |    0    | minimum width in pixels for left/right borders, height for top/bottom borders                                |
 | tabSetMinHeight               |    0    | minimum width (in px) for all tabsets                                                                        |
@@ -318,13 +318,13 @@ Attributes allowed in the 'global' element
 
 Attributes allowed in nodes of type 'row'.
 
-| Attribute | Default | Description  |
-| ------------- |:-------------:| -----|
-| type | row | |
-| weight | 100 | |
-| width | null | preferred pixel width |
-| height | null | preferred pixel height |
-| children | *required* | a list of row and tabset nodes |
+| Attribute |  Default   | Description                    |
+| --------- | :--------: | ------------------------------ |
+| type      |    row     |                                |
+| weight    |    100     |                                |
+| width     |    null    | preferred pixel width          |
+| height    |    null    | preferred pixel height         |
+| children  | *required* | a list of row and tabset nodes |
 
 ## Tab Attributes
 
@@ -333,28 +333,28 @@ Attributes allowed in nodes of type 'tab'.
 Inherited defaults will take their value from the associated global attributes (see above).
 
 
-| Attribute | Default | Description  |
-| ------------- |:-------------:| -----|
-| type | tab | |
-| name | *required* | name of tab to be displayed in the tab button |
-| altName | *optional* | if there is no name specifed then this value will be used in the overflow menu |
-| component | *required* | string identifying which component to run (for factory) |
-| config | null | a place to hold json config for the hosted component |
-| id | auto generated | |
-| helpText | *optional* | An optional help text for the tab to be displayed upon tab hover. |
-| enableClose | *inherited* | allow user to close tab via close button |
-| closeType | *inherited* | see values in ICloseType |
-| enableDrag | *inherited* | allow user to drag tab to new location |
-| enableRename | *inherited* | allow user to rename tabs by double clicking |
-| enableFloat | *inherited* | enable popout (in popout capable browser) |
-| floating | false | |
-| className | *inherited* | class applied to tab button |
-| contentClassName | *inherited* | class applied to tab content |
-| tabsetClassName | undefined | class applied to parent tabset when this is the only tab and it is stretched to fill the tabset |
-| icon | *inherited* | |
-| enableRenderOnDemand | *inherited* | whether to avoid rendering component until tab is visible |
-| borderWidth | *inherited* | width when added to border, -1 will use border size |
-| borderHeight | *inherited* | height when added to border, -1 will use border size |
+| Attribute            |    Default     | Description                                                                                     |
+| -------------------- | :------------: | ----------------------------------------------------------------------------------------------- |
+| type                 |      tab       |                                                                                                 |
+| name                 |   *required*   | name of tab to be displayed in the tab button                                                   |
+| altName              |   *optional*   | if there is no name specifed then this value will be used in the overflow menu                  |
+| component            |   *required*   | string identifying which component to run (for factory)                                         |
+| config               |      null      | a place to hold json config for the hosted component                                            |
+| id                   | auto generated |                                                                                                 |
+| helpText             |   *optional*   | An optional help text for the tab to be displayed upon tab hover.                               |
+| enableClose          |  *inherited*   | allow user to close tab via close button                                                        |
+| closeType            |  *inherited*   | see values in ICloseType                                                                        |
+| enableDrag           |  *inherited*   | allow user to drag tab to new location                                                          |
+| enableRename         |  *inherited*   | allow user to rename tabs by double clicking                                                    |
+| enableFloat          |  *inherited*   | enable popout (in popout capable browser)                                                       |
+| floating             |     false      |                                                                                                 |
+| class                |  *inherited*   | class applied to tab button                                                                     |
+| contentclass         |  *inherited*   | class applied to tab content                                                                    |
+| tabsetclass          |   undefined    | class applied to parent tabset when this is the only tab and it is stretched to fill the tabset |
+| icon                 |  *inherited*   |                                                                                                 |
+| enableRenderOnDemand |  *inherited*   | whether to avoid rendering component until tab is visible                                       |
+| borderWidth          |  *inherited*   | width when added to border, -1 will use border size                                             |
+| borderHeight         |  *inherited*   | height when added to border, -1 will use border size                                            |
 
 Tab nodes have a getExtraData() method that initially returns an empty object, this is the place to 
 add extra data to a tab node that will not be saved.
@@ -368,35 +368,35 @@ Inherited defaults will take their value from the associated global attributes (
 
 Note: tabsets can be dynamically created as tabs are moved and deleted when all their tabs are removed (unless enableDeleteWhenEmpty is false).
 
-| Attribute               | Default | Description                                                                                                                                                                            |
-|-------------------------|:-------------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| type                    | tabset |                                                                                                                                                                                        |
-| weight                  | 100 | relative weight for sizing of this tabset in parent row                                                                                                                                |
-| width                   | null | preferred pixel width                                                                                                                                                                  |
-| height                  | null | preferred pixel height                                                                                                                                                                 |
-| name                    | null | named tabsets will show a header bar above the tabs                                                                                                                                    |
-| config                  | null | a place to hold json config used in your own code                                                                                                                                      |
-| selected                | 0 | index of selected/visible tab in tabset                                                                                                                                                |
-| active                  | false | whether tabset is currently active; this attribute can only be used in the initial configuration, to change the active tabset you should use the `setActiveTabset` action on the model |
-| maximized               | false | whether tabset is currently maximized to fill view                                                                                                                                     |
-| enableClose             | false | allow user to close tabset via a close button                                                                                                                                          |
-| id                      | auto generated |                                                                                                                                                                                        |
-| children                | *required* | a list of tab nodes                                                                                                                                                                    |
-| enableDeleteWhenEmpty   | *inherited* |                                                                                                                                                                                        |
-| enableDrop              | *inherited* | allow user to drag tabs into this tabset                                                                                                                                               |
-| enableDrag              | *inherited* | allow user to drag tabs out this tabset                                                                                                                                                |
-| enableDivide            | *inherited* | allow user to drag tabs to region of this tabset, splitting into new tabset                                                                                                            |
-| enableMaximize          | *inherited* | allow user to maximize tabset to fill view via maximize button                                                                                                                         |
-| enableSingleTabStretch |  *inherited* | if the tabset has only a single tab then stretch the single tab to fill area and display in a header style                                                                             |
-| autoSelectTab           | *inherited* | whether to select new/moved tabs in tabset                                                                                                                                             |
-| classNameTabStrip       | *inherited* |                                                                                                                                                                                        |
-| classNameHeader         | *inherited* |                                                                                                                                                                                        |
-| enableTabStrip          | *inherited* | enable tab strip and allow multiple tabs in this tabset                                                                                                                                |
-| headerHeight            | *inherited* |                                                                                                                                                                                        |
-| tabStripHeight          | *inherited* | height in pixels of tab strip                                                                                                                                                          |
-| tabLocation             | *inherited* | show tabs in location top or bottom                                                                                                                                                    |
-| minHeight               | *inherited* | minimum height (in px) for this tabset                                                                                                                                                 |
-| minWidth                | *inherited* | minimum width (in px) for this tabset                                                                                                                                                  |
+| Attribute              |    Default     | Description                                                                                                                                                                            |
+| ---------------------- | :------------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| type                   |     tabset     |                                                                                                                                                                                        |
+| weight                 |      100       | relative weight for sizing of this tabset in parent row                                                                                                                                |
+| width                  |      null      | preferred pixel width                                                                                                                                                                  |
+| height                 |      null      | preferred pixel height                                                                                                                                                                 |
+| name                   |      null      | named tabsets will show a header bar above the tabs                                                                                                                                    |
+| config                 |      null      | a place to hold json config used in your own code                                                                                                                                      |
+| selected               |       0        | index of selected/visible tab in tabset                                                                                                                                                |
+| active                 |     false      | whether tabset is currently active; this attribute can only be used in the initial configuration, to change the active tabset you should use the `setActiveTabset` action on the model |
+| maximized              |     false      | whether tabset is currently maximized to fill view                                                                                                                                     |
+| enableClose            |     false      | allow user to close tabset via a close button                                                                                                                                          |
+| id                     | auto generated |                                                                                                                                                                                        |
+| children               |   *required*   | a list of tab nodes                                                                                                                                                                    |
+| enableDeleteWhenEmpty  |  *inherited*   |                                                                                                                                                                                        |
+| enableDrop             |  *inherited*   | allow user to drag tabs into this tabset                                                                                                                                               |
+| enableDrag             |  *inherited*   | allow user to drag tabs out this tabset                                                                                                                                                |
+| enableDivide           |  *inherited*   | allow user to drag tabs to region of this tabset, splitting into new tabset                                                                                                            |
+| enableMaximize         |  *inherited*   | allow user to maximize tabset to fill view via maximize button                                                                                                                         |
+| enableSingleTabStretch |  *inherited*   | if the tabset has only a single tab then stretch the single tab to fill area and display in a header style                                                                             |
+| autoSelectTab          |  *inherited*   | whether to select new/moved tabs in tabset                                                                                                                                             |
+| classTabStrip          |  *inherited*   |                                                                                                                                                                                        |
+| classHeader            |  *inherited*   |                                                                                                                                                                                        |
+| enableTabStrip         |  *inherited*   | enable tab strip and allow multiple tabs in this tabset                                                                                                                                |
+| headerHeight           |  *inherited*   |                                                                                                                                                                                        |
+| tabStripHeight         |  *inherited*   | height in pixels of tab strip                                                                                                                                                          |
+| tabLocation            |  *inherited*   | show tabs in location top or bottom                                                                                                                                                    |
+| minHeight              |  *inherited*   | minimum height (in px) for this tabset                                                                                                                                                 |
+| minWidth               |  *inherited*   | minimum width (in px) for this tabset                                                                                                                                                  |
 
 ## Border Attributes
 
@@ -405,22 +405,22 @@ Attributes allowed in nodes of type 'border'.
 Inherited defaults will take their value from the associated global attributes (see above).
 
 
-| Attribute | Default | Description  |
-| ------------- |:-------------:| -----|
-| type | border | |
-| size | *inherited* | size of the tab body when selected |
-| minSize | *inherited* |  |
-| selected | -1 | index of selected/visible tab in border; -1 means no tab unselected / border closed |
-| id | auto generated | border_ + border name e.g. border_left |
-| config | null | a place to hold json config used in your own code |
-| show | true | show/hide this border |
-| enableAutoHide | false | hide border if it has zero tabs |
-| children | *required* | a list of tab nodes |
-| barSize | *inherited* | size of this border's bar in pixels; if left as 0 then the value will be calculated from the current fontSize |
-| enableDrop | *inherited* | |
-| autoSelectTabWhenOpen | *inherited* | whether to select new/moved tabs in border when the border is already open |
-| autoSelectTabWhenClosed | *inherited* | whether to select new/moved tabs in border when the border is currently closed |
-| className | *inherited* | class applied to tab button |
+| Attribute               |    Default     | Description                                                                                                   |
+| ----------------------- | :------------: | ------------------------------------------------------------------------------------------------------------- |
+| type                    |     border     |                                                                                                               |
+| size                    |  *inherited*   | size of the tab body when selected                                                                            |
+| minSize                 |  *inherited*   |                                                                                                               |
+| selected                |       -1       | index of selected/visible tab in border; -1 means no tab unselected / border closed                           |
+| id                      | auto generated | border_ + border name e.g. border_left                                                                        |
+| config                  |      null      | a place to hold json config used in your own code                                                             |
+| show                    |      true      | show/hide this border                                                                                         |
+| enableAutoHide          |     false      | hide border if it has zero tabs                                                                               |
+| children                |   *required*   | a list of tab nodes                                                                                           |
+| barSize                 |  *inherited*   | size of this border's bar in pixels; if left as 0 then the value will be calculated from the current fontSize |
+| enableDrop              |  *inherited*   |                                                                                                               |
+| autoSelectTabWhenOpen   |  *inherited*   | whether to select new/moved tabs in border when the border is already open                                    |
+| autoSelectTabWhenClosed |  *inherited*   | whether to select new/moved tabs in border when the border is currently closed                                |
+| class                   |  *inherited*   | class applied to tab button                                                                                   |
 
 ## Model Actions
 
@@ -431,21 +431,21 @@ You can also apply actions directly using the `Model.doAction()` method.
 This method takes a single argument, created by one of the following action
 generators (typically accessed as `FlexLayout.Actions.<actionName>`):
 
-| Action Creator | Description  |
-| ------------- | -----|
-|	Actions.addNode(newNodeJson, toNodeId, location, index, select?) | add a new tab node to the given tabset node; `select` specifies whether to select new tab, defaulting to `autoSelectTab` attribute; returns the created `Node` |
-|	Actions.moveNode(fromNodeId, toNodeId, location, index, select?) | move a tab node from its current location to the new node and location; `select` specifies whether to select tab, defaulting to new tabset's `autoSelectTab` attribute |
-|	Actions.deleteTab(tabNodeId) | delete the given tab |
-|	Actions.renameTab(tabNodeId, newName) | rename the given tab |
-|	Actions.selectTab(tabNodeId) | select the given tab |
-|	Actions.setActiveTabset(tabsetNodeId) | set the tabset as the active tabset |
-|	Actions.adjustSplit(splitterNodeId, value) | adjust the size of the given splitter |
-|	Actions.adjustBorderSplit(borderNodeId, pos) | updates the size of the given border node |
-|	Actions.maximizeToggle(tabsetNodeId) | toggles whether the given tabset node is maximized |
-|	Actions.updateModelAttributes(attributes) | updates the global attributes |
-|	Actions.updateNodeAttributes(nodeId, attributes) | updates the attributes of the given node |
-|	Actions.floatTab(nodeId) | popout the tab into a floating browser window |
-|	Actions.unFloatTab(nodeId) | restore a popped out tab to the main layout |
+| Action Creator                                                   | Description                                                                                                                                                            |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Actions.addNode(newNodeJson, toNodeId, location, index, select?) | add a new tab node to the given tabset node; `select` specifies whether to select new tab, defaulting to `autoSelectTab` attribute; returns the created `Node`         |
+| Actions.moveNode(fromNodeId, toNodeId, location, index, select?) | move a tab node from its current location to the new node and location; `select` specifies whether to select tab, defaulting to new tabset's `autoSelectTab` attribute |
+| Actions.deleteTab(tabNodeId)                                     | delete the given tab                                                                                                                                                   |
+| Actions.renameTab(tabNodeId, newName)                            | rename the given tab                                                                                                                                                   |
+| Actions.selectTab(tabNodeId)                                     | select the given tab                                                                                                                                                   |
+| Actions.setActiveTabset(tabsetNodeId)                            | set the tabset as the active tabset                                                                                                                                    |
+| Actions.adjustSplit(splitterNodeId, value)                       | adjust the size of the given splitter                                                                                                                                  |
+| Actions.adjustBorderSplit(borderNodeId, pos)                     | updates the size of the given border node                                                                                                                              |
+| Actions.maximizeToggle(tabsetNodeId)                             | toggles whether the given tabset node is maximized                                                                                                                     |
+| Actions.updateModelAttributes(attributes)                        | updates the global attributes                                                                                                                                          |
+| Actions.updateNodeAttributes(nodeId, attributes)                 | updates the attributes of the given node                                                                                                                               |
+| Actions.floatTab(nodeId)                                         | popout the tab into a floating browser window                                                                                                                          |
+| Actions.unFloatTab(nodeId)                                       | restore a popped out tab to the main layout                                                                                                                            |
 
 ### Examples
 
@@ -484,13 +484,13 @@ this.layoutRef.current.addTabToTabSet("NAVIGATION", {type:"tab", component:"grid
 This would add a new grid component to the tabset with id "NAVIGATION" (where this.layoutRef is a ref to the Layout element, see https://reactjs.org/docs/refs-and-the-dom.html ).
 
 
-| Layout Method | Description  |
-| ------------- | -----|
-| addTabToTabSet(tabsetId, json) | adds a new tab to the tabset with the given Id |
-| addTabToActiveTabSet(json) | adds a new tab to the active tabset |
-| addTabWithDragAndDrop(dragText, json, onDrop) | adds a new tab by dragging a marker to the required location, with the drag starting immediately; on success, `onDrop` is passed the created tab `Node`; on cancel, no arguments are passed |
-| addTabWithDragAndDropIndirect(dragText, json, onDrop) | adds a new tab by dragging a marker to the required location, the marker is shown and must be clicked on to start dragging |
-| moveTabWithDragAndDrop( node, dragText) | Move a tab/tabset using drag and drop triggered from a custom event |
+| Layout Method                                         | Description                                                                                                                                                                                 |
+| ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| addTabToTabSet(tabsetId, json)                        | adds a new tab to the tabset with the given Id                                                                                                                                              |
+| addTabToActiveTabSet(json)                            | adds a new tab to the active tabset                                                                                                                                                         |
+| addTabWithDragAndDrop(dragText, json, onDrop)         | adds a new tab by dragging a marker to the required location, with the drag starting immediately; on success, `onDrop` is passed the created tab `Node`; on cancel, no arguments are passed |
+| addTabWithDragAndDropIndirect(dragText, json, onDrop) | adds a new tab by dragging a marker to the required location, the marker is shown and must be clicked on to start dragging                                                                  |
+| moveTabWithDragAndDrop( node, dragText)               | Move a tab/tabset using drag and drop triggered from a custom event                                                                                                                         |
 
 ## Tab Node Events
 
@@ -511,20 +511,20 @@ Example:
 
 ```
 
-| Event        | parameters          | Description  |
-| ------------- |:-------------:| -----|
-| resize |      |  called when tab is resized during layout, called before it is rendered with the new size|
-| close |      |  called when a tab is closed |
-| visibility |      | called when the visibility of a tab changes |
-| save |      | called before a tabnode is serialized to json, use to save node config by adding data to the object returned by node.getConfig()|
+| Event      | parameters | Description                                                                                                                      |
+| ---------- | :--------: | -------------------------------------------------------------------------------------------------------------------------------- |
+| resize     |            | called when tab is resized during layout, called before it is rendered with the new size                                         |
+| close      |            | called when a tab is closed                                                                                                      |
+| visibility |            | called when the visibility of a tab changes                                                                                      |
+| save       |            | called before a tabnode is serialized to json, use to save node config by adding data to the object returned by node.getConfig() |
 
 
 ## Alternative Layout Managers
 
-| Name | Repository |
-| ------------- |:-------------|
-| rc-dock | https://github.com/ticlo/rc-dock | 
-| Dockview | https://dockview.dev/ | 
-| lumino | https://github.com/jupyterlab/lumino | 
+| Name          | Repository                                     |
+| ------------- | :--------------------------------------------- |
+| rc-dock       | https://github.com/ticlo/rc-dock               |
+| Dockview      | https://dockview.dev/                          |
+| lumino        | https://github.com/jupyterlab/lumino           |
 | golden-layout | https://github.com/golden-layout/golden-layout |
-| react-mosaic | https://github.com/nomcopter/react-mosaic |
+| react-mosaic  | https://github.com/nomcopter/react-mosaic      |

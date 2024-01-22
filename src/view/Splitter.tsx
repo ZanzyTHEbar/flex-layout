@@ -31,7 +31,7 @@ export const Splitter = (props: ISplitterProps) => {
         const rootdiv = layout.getRootDiv();
         outlineDiv.current = layout.getCurrentDocument()!.createElement("div");
         outlineDiv.current.style.position = "absolute";
-        outlineDiv.current.className = layout.getClassName(CLASSES.FLEXLAYOUT__SPLITTER_DRAG);
+        outlineDiv.current.class = layout.getclass(CLASSES.FLEXLAYOUT__SPLITTER_DRAG);
         outlineDiv.current.style.cursor = node.getOrientation() === Orientation.HORZ ? "ns-resize" : "ew-resize";
         const r = node.getRect();
         if (node.getOrientation() === Orientation.VERT && r.width < 2) {
@@ -124,15 +124,15 @@ export const Splitter = (props: ISplitterProps) => {
         return rtn;
     };
 
-    const cm = layout.getClassName;
+    const cm = layout.getclass;
     const r = node.getRect();
     const style = r.styleWithPosition({
         cursor: node.getOrientation() === Orientation.HORZ ? "ns-resize" : "ew-resize",
     });
-    let className = cm(CLASSES.FLEXLAYOUT__SPLITTER) + " " + cm(CLASSES.FLEXLAYOUT__SPLITTER_ + node.getOrientation().getName());
+    let class = cm(CLASSES.FLEXLAYOUT__SPLITTER) + " " + cm(CLASSES.FLEXLAYOUT__SPLITTER_ + node.getOrientation().getName());
 
     if (parentNode instanceof BorderNode) {
-        className += " " + cm(CLASSES.FLEXLAYOUT__SPLITTER_BORDER);
+        class += " " + cm(CLASSES.FLEXLAYOUT__SPLITTER_BORDER);
     } else {
         if (node.getModel().getMaximizedTabset() !== undefined) {
             style.display = "none";
@@ -141,7 +141,7 @@ export const Splitter = (props: ISplitterProps) => {
 
     const extra = node.getModel().getSplitterExtra();
     if (extra === 0) {
-        return <div style={style} data-layout-path={path} className={className} onTouchStart={onMouseDown} onMouseDown={onMouseDown}></div>;
+        return <div style={style} data-layout-path={path} class={class} onTouchStart={onMouseDown} onMouseDown={onMouseDown}></div>;
     } else {
         // add extended transparent div for hit testing
         // extends forward only, so as not to interfere with scrollbars
@@ -157,11 +157,11 @@ export const Splitter = (props: ISplitterProps) => {
             cursor: node.getOrientation() === Orientation.HORZ ? "ns-resize" : "ew-resize",
         });
 
-        const className2 = cm(CLASSES.FLEXLAYOUT__SPLITTER_EXTRA);
+        const class2 = cm(CLASSES.FLEXLAYOUT__SPLITTER_EXTRA);
 
         return (
-            <div style={style} data-layout-path={path} className={className}>
-                <div style={style2} className={className2} onTouchStart={onMouseDown} onMouseDown={onMouseDown}></div>
+            <div style={style} data-layout-path={path} class={class}>
+                <div style={style2} class={class2} onTouchStart={onMouseDown} onMouseDown={onMouseDown}></div>
             </div>
         );
     }
