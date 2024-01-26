@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Attribute } from '../Attribute'
 import { AttributeDefinitions } from '../AttributeDefinitions'
 import { Rect } from '../Rect'
@@ -197,6 +198,7 @@ export class TabNode extends Node implements IDraggable {
     }
 
     /** @internal */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _layout(rect: Rect, metrics: ILayoutMetrics) {
         if (!rect.equals(this._rect)) {
             this._fireEvent('resize', { rect })
@@ -206,7 +208,7 @@ export class TabNode extends Node implements IDraggable {
 
     /** @internal */
     _delete() {
-        ;(this._parent as TabSetNode | BorderNode)._remove(this)
+        (this._parent as TabSetNode | BorderNode)._remove(this)
         this._fireEvent('close', {})
     }
 

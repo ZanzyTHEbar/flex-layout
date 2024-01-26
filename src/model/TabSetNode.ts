@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Attribute } from '../Attribute'
 import { AttributeDefinitions } from '../AttributeDefinitions'
 import { DockLocation } from '../DockLocation'
-import { DropInfo } from '../DropInfo'
+import DropInfo from '../DropInfo'
 import { Orientation } from '../Orientation'
 import { Rect } from '../Rect'
 import { CLASSES } from '../Types'
@@ -411,7 +412,7 @@ export class TabSetNode extends Node implements IDraggable, IDropTarget {
 
     /** @internal */
     _delete() {
-        ;(this._parent as RowNode)._removeChild(this)
+        (this._parent as RowNode)._removeChild(this)
     }
 
     /** @internal */

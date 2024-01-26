@@ -78,3 +78,6 @@ export function adjustSelectedIndex(
 export function randomUUID() {
     return ulid()
 }
+
+/** @internal */
+export const afterPaint = (fn: () => void) => requestAnimationFrame(() => requestAnimationFrame(fn))

@@ -1,4 +1,4 @@
-import * as React from 'react'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Rect } from './Rect'
 
 /** @internal */
@@ -18,7 +18,7 @@ export class DragDrop {
     /** @internal */
     private _fDragEnd: ((event: Event) => void) | undefined
     /** @internal */
-    private _fDragMove: ((event: React.MouseEvent<Element>) => void) | undefined
+    private _fDragMove: ((event: MouseEvent) => void) | undefined
     /** @internal */
     private _fDragStart: ((pos: { clientX: number; clientY: number }) => boolean) | undefined
     /** @internal */
@@ -57,15 +57,15 @@ export class DragDrop {
     /** @internal */
     private _lastEvent?:
         | Event
-        | React.MouseEvent<HTMLDivElement, MouseEvent>
-        | React.TouchEvent<HTMLDivElement>
-        | React.DragEvent<Element>
+        | MouseEvent
+        | TouchEvent
+        | DragEvent
         | undefined
 
     /** @internal */
     private constructor() {
         if (canUseDOM) {
-            // check for serverside rendering
+            // check for server-side rendering
             this._glass = document.createElement('div')
             this._glass.style.zIndex = '998'
             this._glass.style.backgroundColor = 'transparent'
@@ -149,12 +149,12 @@ export class DragDrop {
     startDrag(
         event:
             | Event
-            | React.MouseEvent<HTMLDivElement, MouseEvent>
-            | React.TouchEvent<HTMLDivElement>
-            | React.DragEvent<Element>
+            | MouseEvent
+            | TouchEvent
+            | DragEvent
             | undefined,
         fDragStart: ((pos: { clientX: number; clientY: number }) => boolean) | undefined,
-        fDragMove: ((event: React.MouseEvent<Element>) => void) | undefined,
+        fDragMove: ((event: MouseEvent) => void) | undefined,
         fDragEnd: ((event: Event) => void) | undefined,
         fDragCancel?: ((wasDragging: boolean) => void) | undefined,
         fClick?: ((event: Event) => void) | undefined,
@@ -303,9 +303,9 @@ export class DragDrop {
     private _stopPropagation(
         event:
             | Event
-            | React.MouseEvent<HTMLDivElement, MouseEvent>
-            | React.TouchEvent<HTMLDivElement>
-            | React.DragEvent<Element>,
+            | MouseEvent
+            | TouchEvent
+            | DragEvent,
     ) {
         if (event.stopPropagation) {
             event.stopPropagation()
@@ -316,9 +316,9 @@ export class DragDrop {
     private _preventDefault(
         event:
             | Event
-            | React.MouseEvent<HTMLDivElement, MouseEvent>
-            | React.TouchEvent<HTMLDivElement>
-            | React.DragEvent<Element>,
+            | MouseEvent
+            | TouchEvent
+            | DragEvent,
     ) {
         if (event.preventDefault && event.cancelable) {
             event.preventDefault()
@@ -330,9 +330,9 @@ export class DragDrop {
     private _onMouseMove(
         event:
             | Event
-            | React.MouseEvent<HTMLDivElement, MouseEvent>
-            | React.TouchEvent<HTMLDivElement>
-            | React.DragEvent<Element>,
+            | MouseEvent
+            | TouchEvent
+            | DragEvent,
     ) {
         this._lastEvent = event
 

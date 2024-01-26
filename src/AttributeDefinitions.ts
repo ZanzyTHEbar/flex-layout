@@ -82,7 +82,7 @@ export class AttributeDefinitions {
     }
 
     toTypescriptInterface(name: string, parentAttributes: AttributeDefinitions | undefined) {
-        const lines = []
+        const lines: string[] = []
         const sorted = this.attributes.sort((a, b) => a.name.localeCompare(b.name))
         // const sorted = this.attributes;
         lines.push('export interface I' + name + 'Attributes {')
@@ -92,7 +92,7 @@ export class AttributeDefinitions {
             let defaultValue = undefined
 
             let attr = c
-            let inherited = undefined
+            let inherited: string |undefined = undefined
             if (attr.defaultValue !== undefined) {
                 defaultValue = attr.defaultValue
             } else if (

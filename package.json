@@ -3,11 +3,7 @@
     "author": "ZanzyTHRBar",
     "type": "module",
     "description": "A multi-tab docking layout manager",
-<<<<<<< HEAD
     "version": "0.0.0",
-=======
-    "version": "0.2.2",
->>>>>>> a171a6d74ef19f75311c97267639a69d9e130bc1
     "license": "ISC",
     "private": false,
     "sideEffects": false,

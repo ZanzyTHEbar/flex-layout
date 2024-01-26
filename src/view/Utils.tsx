@@ -1,6 +1,7 @@
-import * as React from 'react'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TabNode } from '../model/TabNode'
 import { IconFactory, ILayoutCallbacks, ITitleObject, TitleFactory } from './Layout'
+import type { JSXElement } from 'solid-js'
 
 /** @internal */
 export function getRenderStateEx(
@@ -9,9 +10,14 @@ export function getRenderStateEx(
     iconFactory?: IconFactory,
     titleFactory?: TitleFactory,
     iconAngle?: number,
-) {
+): {
+    leading: JSXElement
+    content: JSXElement
+    name: string
+    buttons: any[]
+} {
     let leadingContent = iconFactory ? iconFactory(node) : undefined
-    let titleContent: React.ReactNode = node.getName()
+    let titleContent: JSXElement = node.getName()
     let name = node.getName()
     if (iconAngle === undefined) {
         iconAngle = 0
@@ -81,13 +87,11 @@ export function hideElement(style: Record<string, any>, useVisibility: Constrain
 }
 
 /** @internal */
-export function isAuxMouseEvent(
-    event: React.MouseEvent<HTMLDivElement, MouseEvent> | React.TouchEvent<HTMLDivElement>,
-) {
+export function isAuxMouseEvent(event: MouseEvent | TouchEvent) {
     let auxEvent = false
-    if (event.nativeEvent instanceof MouseEvent) {
+    if (event instanceof MouseEvent) {
         if (
-            event.nativeEvent.button !== 0 ||
+            event.button !== 0 ||
             event.ctrlKey ||
             event.altKey ||
             event.metaKey ||

@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AttributeDefinitions } from '../AttributeDefinitions'
 import { DockLocation } from '../DockLocation'
-import { DropInfo } from '../DropInfo'
+import DropInfo from '../DropInfo'
 import { Orientation } from '../Orientation'
 import { Rect } from '../Rect'
 import { IDraggable } from './IDraggable'

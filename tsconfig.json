@@ -1,19 +1,11 @@
 {
     "compilerOptions": {
-<<<<<<< HEAD
         "baseUrl": ".",
-=======
         "outDir": "./dist/",
         "sourceMap": true,
-        "noImplicitAny": true,
-        "module": "ES6",
-        "moduleResolution": "node",
-        "target": "ES6",
         "stripInternal": true,
         "alwaysStrict": true,
-        "forceConsistentCasingInFileNames": true,
         "noImplicitReturns": true,
->>>>>>> a171a6d74ef19f75311c97267639a69d9e130bc1
         "strict": true,
         "target": "ESNext",
         "module": "ESNext",
